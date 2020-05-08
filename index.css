@@ -1,0 +1,134 @@
+@font-face {
+  src: url(Resource\MonospaceTypewriter.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-family: 'MonospaceTypewriter', monospace;
+  user-select: none;
+}
+.clearFix::after {
+  clear: both;
+  content: '';
+  display: block;
+}
+#moneyDisplay {
+  margin: 10px 0;
+  font-size: 3em;
+  text-align: center;
+  width: 100vw;
+}
+#mainNavs {
+  width: 100vw;
+  text-align: center;
+}
+#mainNavs > span {
+  margin: 0 4px;
+  padding: 2px 4px;
+  font-size: 2.2em;
+  border-radius: 3px;
+  font-weight: bold;
+
+  transition: all 0.2s;
+}
+.tier1 {
+  border: 3px solid #ebab34;
+  background-color: #4aa7e0;
+  color: #ffffff;
+}
+.tier1:hover {
+  border: 3px solid #4aa7e0;
+  background-color: #ebab34;
+  color: #4aa7e0;
+}
+.tier2 {
+  border: 3px solid #b8442a;
+  background-color: #d1628c;
+  color: #b8442a;
+  text-shadow: 0 0 2px #b8442a;
+}
+.tier2:hover {
+  border: 3px solid #d1628c;
+  background-color: #b8442a;
+  color: #d1628c;
+  text-shadow: 0 0 2px #d1628c;
+}
+.tier3 {
+  color: #34702c;
+  text-shadow: 0 0 2px #34702c;
+  animation-duration: 1s;
+  animation-name: tier3Shiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes tier3Shiny {
+  from {
+    border: 3px solid #34702c;
+    background-color: #949494;
+  }
+  50% {
+    border: 3px solid #6fb066;
+    background-color: #6b6b6b;
+  }
+  to {
+    border: 3px solid #34702c;
+    background-color: #949494;
+  }
+}
+.tier3:hover {
+  color: #27132b;
+  text-shadow: 0 0 2px #27132b;
+}
+.tier4 {
+  color: #4a70b5;
+  text-shadow: 0 0 10px #9aa5b8;
+  background: linear-gradient(#3ea3b3, #d895de);
+  animation-duration: 10s;
+  animation-name: tier4Shiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes tier4Shiny {
+  from {
+    border: 3px solid #85407f;
+    filter: blur(1px) drop-shadow(0);
+  }
+  50% {
+    border: 3px solid #71bbd1;
+    filter: blur(2px) drop-shadow(2px 2px 4px #3ea3b3);
+  }
+  to {
+    border: 3px solid #85407f;
+    filter: blur(1px) drop-shadow(0);
+  }
+}
+.tier4:hover {
+  color: #d171ce;
+}
+.tier5 {
+  border: 3px solid #1c0929;
+  color: #1c0929;
+  text-shadow: 0 0 10px #1c0929;
+  background-color: #4d4652;
+}
+.tier5:hover {
+  color: #ebe8ed;
+  text-shadow: 0 0 10px #ebe8ed;
+}
+.tier6 {
+  border: 3px solid #000;
+  color: #fff;
+  text-shadow: 0 0 10px #000;
+  background-color: #fff;
+}
+.tier6:hover {
+  color: #000;
+  text-shadow: 0 0 10px #000;
+}
+#warpMenus {
+  margin-top: 10px;
+}
+.sructs {
+  width: 100vw;
+}
