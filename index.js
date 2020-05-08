@@ -1,5 +1,6 @@
 $(function (){
   gunpowder = new Decimal('1');
+  gps = new Decimal('0');
   notationMod = 0;
 
   function notation(num) {
