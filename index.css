@@ -13,7 +13,7 @@
   content: '';
   display: block;
 }
-#moneyDisplay {
+#gunpowder {
   margin: 10px 0;
   font-size: 3em;
   text-align: center;
@@ -29,6 +29,7 @@
   font-size: 2.2em;
   border-radius: 3px;
   font-weight: bold;
+  cursor: pointer;
 
   transition: all 0.2s;
 }
@@ -129,6 +130,48 @@
 #warpMenus {
   margin-top: 10px;
 }
-.sructs {
-  width: 100vw;
+.structs {
+  margin-left: 5vw;
+  margin-bottom: 2vh;
+  width: 90vw;
+}
+.structs > span {
+  font-size: 1.5vw;
+}
+.structs > span:nth-child(1) > sup {
+  font-size: 1vw;
+}
+.structs > span:nth-child(2) {
+  position: absolute;
+}
+.structs > span:nth-child(2) {
+  position: absolute;
+  left: 40.5vw;
+}
+.structs > span:nth-child(3) {
+  position: absolute;
+  text-align: center;
+  width: 6vw;
+  left: 85vw;
+
+  transition: all 0.3s;
+}
+.strBuyY {
+  border: 3px solid #68c967;
+  color: #92a192;
+  background-color: rgba(168, 168, 168, 0.5);
+  border-radius: 1px;
+  cursor: pointer;
+}
+.strBuyY:hover {
+  border: 3px solid #72d158;
+  color: #fff;
+  background-color: #92a192;
+  border-radius: 3px;
+}
+.strBuyN {
+  border: 3px solid #c96767;
+  color: #000;
+  background-color: #a39595;
+  border-radius: 1px;
 }
