@@ -1,6 +1,8 @@
 $(function (){
   gunpowder = new Decimal('1');
-  gps = new Decimal('0');
+  gps = new Decimal('1');
+  lastTick = new Date().getTime();
+  timeNow = new Date().getTime();
   notationMod = 0;
 
   function notation(num) {
@@ -16,6 +18,9 @@ $(function (){
     $('#gunpowder').html(function (index,html) {
       return 'You Have ' + notation(gunpowder) + ' Gunpowder';
     });
+    $('#gps').html(function (index,html) {
+      return notation(gps) + 'g/s';
+    });
   }
 
   $(document).on('click','#mainNavs > span',function() {
@@ -25,9 +30,10 @@ $(function (){
   });
 
   setInterval( function (){
-    gunpowder = gunpowder.multiply('12450918243562664640');
+    tickGain = timeNow - lastTick;
+    gunpowder = gunpowder.add(gps.multiply(tickGain/1000));
     displayBasic();
+    lastTick = timeNow;
+    timeNow = new Date().getTime();
   }, 100);
-
-  $('#mainNavs > span:not(.tier1)').hide();
 });
