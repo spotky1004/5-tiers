@@ -1,4 +1,5 @@
 $(function (){
+  savePoint = 'GunpowderFactory';
   gunpowder = new Decimal('10');
   gps1 = new Decimal('0');
   gps2 = new Decimal('0');
@@ -28,10 +29,10 @@ $(function (){
     for (var i = 0; i < varData.length; i++) {
       saveFile[i] = eval(varData[i]);
     }
-    localStorage.setItem('saveFile', JSON.stringify(saveFile));
+    localStorage[savePoint] = JSON.stringify(saveFile);
   }
   function gameLoad() {
-    savedFile = JSON.parse(localStorage.getItem('saveFile'));
+    savedFile = JSON.parse(localStorage[savePoint]);
     dataCopy = JSON.parse(JSON.stringify(resetData));
     Object.assign(dataCopy, savedFile);
     for (var i = 0; i < varData.length; i++) {
@@ -183,6 +184,6 @@ function gameReset() {
   for (var i = 0; i < varData.length; i++) {
     saveFile[i] = eval(varData[i]);
   }
-  localStorage.setItem('saveFile', JSON.stringify(saveFile));
+  localStorage[savePoint] = JSON.stringify(saveFile);
   location.reload();
 }
