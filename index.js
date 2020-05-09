@@ -7,6 +7,7 @@ $(function (){
   gLimitLevel = new Decimal('0');
   booster = new Decimal('0');
   bpc = new Decimal('1');
+  boughtStr = new Decimal('0');
   boosterBoost = new Decimal('1');
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
@@ -97,6 +98,11 @@ $(function (){
     gunpowder = gunpowder.add(gps1.multiply(tickGain));
   }
   function calcBooster() {
+    boughtStr = new Decimal('0');
+    for (var i = 0; i < 10; i++) {
+      boughtStr = boughtStr.add(structsHave[i]);
+    }
+    bpc = boughtStr.multiply(0.2).add(1)
     boosterDeacy = new Decimal('1.001');
     boosterDeacy = boosterDeacy.pow_base(tickGain/500+1);
     if (booster.gt(0.1)) {
