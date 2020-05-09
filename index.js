@@ -18,6 +18,7 @@ $(function (){
   timeNow = new Date().getTime();
   menuNow = 0;
   notationMod = 0;
+  titleCool = 10;
 
   $(document).keydown(function(e) {
     if (event.keyCode == '77') {
@@ -279,7 +280,16 @@ $(function (){
   }, 100);
   setInterval( function (){
     gameSave();
+    if (titleCool < 0) {
+      $('title').html(function (index,html) {
+        return 'You Have ' + notation(gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain))) + ' Gunpowder';
+      });
+    } else {
+      titleCool -= 5;
+    }
   }, 5000);
+
+
 
   gameLoad();
 });
