@@ -67,7 +67,7 @@ $(function (){
       buyable = new Decimal(Math.max(Math.floor(leftOOM.divide(pubExpeThis))+1, 0));
       if (buyable.gt(0)) {
         structsHave[i] = structsHave[i].add(buyable);
-        gunpowder = gunpowder.minus(structsCost[i].multiply(pubExpeThis.pow_base(10).pow(buyable)));
+        gunpowder = gunpowder.minus(structsCost[i].multiply(pubExpeThis.pow_base(10).pow(buyable-1)));
         switch (structsPower[i][1]) {
           case 1:
             gps1 = gps1.add(buyable.multiply(structsPower[i][0]));
