@@ -104,7 +104,7 @@ $(function (){
     } else {
       booster = booster.add(booster.multiply('-1'))
     }
-    boosterBoost = new Decimal(booster.divide('10').add('1').log(10)+1);
+    boosterBoost = new Decimal(booster.divide('10').add('1').log(8)+1);
     if (booster.gt('1e10')) {
       boosterBoost = new Decimal(boosterBoost*booster.divide('1e9').log(10));
     }
