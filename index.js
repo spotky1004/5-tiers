@@ -77,7 +77,7 @@ $(function (){
   function displayStructs() {
     for (var i = 0; i < 10; i++) {
       $('.structs:eq(' + i + ') > span:nth-child(1)').html(function (index,html) {
-        return structsName[i] + ': ' + notation(structsHave[i]) + ' (' + notation(boosterBoost.multiply(structsPower[i][0])) + '/s<sup>' + (structsPower[i][1] >= 2 ? structsPower[i][1] : '') + '</sup>)';
+        return structsName[i] + ': ' + notation(structsHave[i]) + ' (' + notation(overallBoost.multiply(structsPower[i][0])) + '/s<sup>' + (structsPower[i][1] >= 2 ? structsPower[i][1] : '') + '</sup>)';
       });
       $('.structs:eq(' + i + ') > span:nth-child(2)').html(function (index,html) {
         return 'cost: ' + notation(structsCost[i]) + 'g';
