@@ -19,6 +19,12 @@ $(function (){
   menuNow = 0;
   notationMod = 0;
 
+  $(document).keydown(function(e) {
+    if (event.keyCode == '77') {
+      buyMaxAll();
+    }
+  });
+
   function notation(num) {
     if (notationMod == 0) {
       if (num.exponent >= 6) {
@@ -48,6 +54,35 @@ $(function (){
         }
       } else {
         this[varData[i]] = dataCopy[i];
+      }
+    }
+  }
+  function buyMaxAll() {
+    buyMaxStr();
+  }
+  function buyMaxStr() {
+    for (var i = 9; i >= 0; i--) {
+      pubExpeThis = new Decimal(Math.log10((i+1)/5+1));
+      leftOOM = new Decimal(gunpowder.add('2').divide(structsCost[i]).log(10));
+      buyable = new Decimal(Math.max(Math.floor(leftOOM.divide(pubExpeThis)), 0));
+      if (buyable.gt(0)) {
+        structsHave[i] = structsHave[i].add(buyable);
+        gunpowder = gunpowder.minus(structsCost[i].multiply(pubExpeThis.pow_base(10).pow(buyable)));
+        switch (structsPower[i][1]) {
+          case 1:
+            gps1 = gps1.add(buyable.multiply(structsPower[i][0]));
+            break;
+          case 2:
+            gps2 = gps2.add(buyable.multiply(structsPower[i][0]));
+            break;
+          case 3:
+            gps3 = gps3.add(buyable.multiply(structsPower[i][0]));
+            break;
+          case 4:
+            gps4 = gps4.add(buyable.multiply(structsPower[i][0]));
+            break;
+        }
+        structsCost[i] = structsCost[i].multiply(pubExpeThis.pow_base(10).pow(buyable));
       }
     }
   }
@@ -118,7 +153,7 @@ $(function (){
     gunpowder = gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain));
     gLimit = gLimitLevel.pow_base('1e5').multiply('1e20');
     if (gunpowder.gt(gLimit)) {
-      if (eCount.lt(5)) {
+      if (eCount.lt(10)) {
         firstExplosion();
       }
       eCount = eCount.add('1');
@@ -195,6 +230,9 @@ $(function (){
     booster = booster.add(bpc);
     calcBooster();
     displayBooster();
+  });
+  $(document).on('click','#strBuyMax',function() {
+    buyMaxStr();
   });
   $(document).on('click','.structs > span:nth-child(3)',function() {
     indexThis = $('.structs > span:nth-child(3)').index(this);

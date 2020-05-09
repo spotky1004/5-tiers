@@ -37,7 +37,7 @@ structsPower = [
   [1e2, 3],
   [5e3, 3],
   [2e5, 4]
-]
+];
 varData = [
   'gunpowder', 'gps1', 'gps2', 'gps3', 'gps4',
   'structsCost', 'gLimitLevel', 'lastTick', 'booster', 'structsHave',
