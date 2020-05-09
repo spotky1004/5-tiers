@@ -130,7 +130,7 @@ $(function (){
   });
   $(document).on('click','.structs > span:nth-child(3)',function() {
     indexThis = $('.structs > span:not(.strBuyN):nth-child(3)').index(this);
-    if (indexThis != -1) {
+    if (indexThis != -1 && gunpowder.greaterThanOrEqualTo(structsCost[indexThis])) {
       gunpowder = gunpowder.minus(structsCost[indexThis]);
       structsHave[indexThis] = structsHave[indexThis].add('1');
       structsCost[indexThis] = structsCost[indexThis].multiply((indexThis+1)/5+1);
