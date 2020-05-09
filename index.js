@@ -97,8 +97,8 @@ $(function (){
     gunpowder = gunpowder.add(gps1.multiply(tickGain));
   }
   function calcBooster() {
-    boosterDeacy = new Decimal('1.000001');
-    boosterDeacy = boosterDeacy.pow_base(tickGain/10+1);
+    boosterDeacy = new Decimal('1.001');
+    boosterDeacy = boosterDeacy.pow_base(tickGain/100+1);
     if (booster.gt(0.1)) {
       booster = booster.divide(boosterDeacy);
     } else {
