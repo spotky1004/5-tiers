@@ -34,12 +34,15 @@
 #mainNavs > span {
   margin: 0 4px;
   padding: 2px 4px;
-  font-size: 2.2em;
+  font-size: 1.1vw;
   border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
 
   transition: all 0.2s;
+}
+#mainNavs > span:active {
+  filter: drop-shadow(2px 2px 3px grey);
 }
 .tier1 {
   border: 3px solid #ebab34;
@@ -166,7 +169,7 @@
 }
 .strBuyY {
   border: 3px solid #68c967;
-  color: #92a192;
+  color: #68c967;
   background-color: rgba(168, 168, 168, 0.5);
   border-radius: 1px;
   cursor: pointer;
@@ -177,9 +180,40 @@
   background-color: #92a192;
   border-radius: 3px;
 }
+.strBuyY:active {
+  border: 3px solid #72d158;
+  color: #d1d1d1;
+  background-color: #afc9af;
+  border-radius: 3px;
+  transform: scale(1.1);
+}
 .strBuyN {
   border: 3px solid #c96767;
   color: #000;
   background-color: #a39595;
   border-radius: 1px;
+}
+#booster {
+  text-align: center;
+  color: #e3ad30;
+  font-size: 3em;
+}
+#boostButton {
+  margin-left: 42.5vw;
+  font-size: 1.2vw;
+  width: 15vw;
+  text-align: center;
+  color: #e3ad30;
+  background-color: #f2deb1;
+  border: 3px solid #e3ad30;
+  border-radius: 3px;
+}
+#boostButton:hover {
+  color: #f2deb1;
+  background-color: #e3ad30;
+  border: 3px solid #f2deb1;
+}
+#boostButton:active {
+  color: #edc466;
+  transform: scale(1.25);
 }
