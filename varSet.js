@@ -36,7 +36,7 @@ structsPower = [
   [1e3, 2],
   [1e2, 3],
   [5e3, 3],
-  [10, 4],
+  [200, 4],
 ]
 varData = [
   'gunpowder', 'gps1', 'gps2', 'gps3', 'gps4',
