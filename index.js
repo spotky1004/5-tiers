@@ -98,7 +98,7 @@ $(function (){
   }
   function calcBooster() {
     boosterDeacy = new Decimal('1.001');
-    boosterDeacy = boosterDeacy.pow_base(tickGain/100+1);
+    boosterDeacy = boosterDeacy.pow_base(tickGain/500+1);
     if (booster.gt(0.1)) {
       booster = booster.divide(boosterDeacy);
     } else {
