@@ -118,7 +118,7 @@ $(function (){
     gunpowder = gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain));
     gLimit = gLimitLevel.pow_base('1e5').multiply('1e20');
     if (gunpowder.gt(gLimit)) {
-      if (eCount.eq(0)) {
+      if (eCount.lt(5)) {
         firstExplosion();
       }
       eCount = eCount.add('1');
