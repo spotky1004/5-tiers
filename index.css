@@ -217,3 +217,54 @@
   color: #edc466;
   transform: scale(1.25);
 }
+#explsionScreen {
+  padding-top: 45vh;
+  width: 100vw;
+  height: 55vh;
+  text-align: center;
+  cursor: pointer;
+
+  animation-duration: 2s;
+  animation-name: explsionScreenShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes explsionScreenShiny {
+  from {
+    background-color: #e3463b;
+  }
+  50% {
+    background-color: #9e2f28;
+  }
+  to {
+    background-color: #e3463b;
+  }
+}
+#explsionScreen > p {
+  font-size: 5vh;
+
+  animation-duration: 2s;
+  animation-name: explsionScreenTShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes explsionScreenTShiny {
+  from {
+    color: white;
+    filter: blur(1px);
+  }
+  50% {
+    color: #e3463b;
+    filter: blur(10px);
+  }
+  to {
+    color: white;
+    filter: blur(1px);
+  }
+}
+#explosionPoint {
+  text-align: center;
+  color: #c2372f;
+  font-size: 3em;
+  text-shadow: 0 0 3px #c2372f;
+}

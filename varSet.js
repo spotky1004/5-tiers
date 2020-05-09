@@ -40,7 +40,8 @@ structsPower = [
 ]
 varData = [
   'gunpowder', 'gps1', 'gps2', 'gps3', 'gps4',
-  'structsCost', 'gLimitLevel', 'lastTick', 'booster', 'structsHave'
+  'structsCost', 'gLimitLevel', 'lastTick', 'booster', 'structsHave',
+  'ep', 'eCount'
 ];
 resetData = {
   0: new Decimal('10'),
@@ -52,5 +53,7 @@ resetData = {
   6: new Decimal('0'),
   7: new Date().getTime(),
   8: new Decimal('0'),
-  9: structsHave
+  9: structsHave,
+  10: new Decimal('0'),
+  11: new Decimal('0')
 };
