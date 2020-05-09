@@ -63,8 +63,8 @@ $(function (){
   function buyMaxStr() {
     for (var i = 9; i >= 0; i--) {
       pubExpeThis = new Decimal(Math.log10((i+1)/5+1));
-      leftOOM = new Decimal(gunpowder.add('2').divide(structsCost[i]).log(10));
-      buyable = new Decimal(Math.max(Math.floor(leftOOM.divide(pubExpeThis)), 0));
+      leftOOM = new Decimal(gunpowder.divide(structsCost[i]).log(10));
+      buyable = new Decimal(Math.max(Math.floor(leftOOM.divide(pubExpeThis))+1, 0));
       if (buyable.gt(0)) {
         structsHave[i] = structsHave[i].add(buyable);
         gunpowder = gunpowder.minus(structsCost[i].multiply(pubExpeThis.pow_base(10).pow(buyable)));
