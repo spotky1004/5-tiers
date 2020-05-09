@@ -62,7 +62,7 @@ $(function (){
       return 'You Have ' + notation(gunpowder) + '/' + notation(gLimit) + ' Gunpowder';
     });
     $('#gps').html(function (index,html) {
-      return notation(gps1) + 'g/s' + (gps2 > 0 ? ', ' + notation(gps2) + 'g/s<sup>2</sup>': '') + (gps3 > 0 ? ', ' + notation(gps3) + 'g/s<sup>3</sup>': '') + (gps4 > 0 ? ', ' + notation(gps4) + 'g/s<sup>4</sup>': '');
+      return notation(gps1.multiply(boosterBoost)) + 'g/s' + (gps2 > 0 ? ', ' + notation(gps2.multiply(boosterBoost)) + 'g/s<sup>2</sup>': '') + (gps3 > 0 ? ', ' + notation(gps3.multiply(boosterBoost)) + 'g/s<sup>3</sup>': '') + (gps4 > 0 ? ', ' + notation(gps4.multiply(boosterBoost)) + 'g/s<sup>4</sup>': '');
     });
   }
   function displayStructs() {
