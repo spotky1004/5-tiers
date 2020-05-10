@@ -25,6 +25,11 @@ $(function (){
     if (event.keyCode == '77') {
       buyMaxAll();
     }
+    else if (event.keyCode == '69') {
+      if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
+        doExplosion();
+      }
+    }
   });
 
   function notation(num) {
@@ -139,7 +144,7 @@ $(function (){
     if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
       $('#explosionNow').show();
       $('#explosionNow > p').html(function (index,html) {
-        return 'Explosion Now and get <br>' + notation(epGain) + ' EP';
+        return 'Explosion Now and get (E)<br>' + notation(epGain) + ' EP';
       });
     } else {
       $('#explosionNow').hide();
@@ -285,7 +290,6 @@ $(function (){
     gps3 = new Decimal('0');
     gps4 = new Decimal('0');
     booster = new Decimal('0');
-    epGain = new Decimal('0');
   }
 
   $(document).on('click','#mainNavs > span',function() {
@@ -366,8 +370,6 @@ $(function (){
       titleCool -= 5;
     }
   }, 5000);
-
-
 
   gameLoad();
 });
