@@ -227,10 +227,13 @@ $(function (){
   }
   function calcExplosion() {
     epBoost = ep.sqrt(2).add(1);
+    researchProgressSpeed = new Decimal('0.99');
+    researchProgressGain = researchProgressSpeed.pow(tickGain).multiply(-1).add(1);
+    console.log(notation(researchProgressGain));
     for (var i = 0; i < 10; i++) {
       if (researchAssign[i].gt(0)) {
-        researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/500));
-        researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/500));
+        researchCount[i] = researchCount[i].add(researchAssign[i].multiply(researchProgressGain));
+        researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(researchProgressGain));
       } else {
         researchAssign[i] = new Decimal('0');
       }
