@@ -238,7 +238,7 @@ $(function (){
     researchBoost[0] = researchCount[0].pow(3);
     researchBoost[1] = researchCount[1];
     gLimitLevel = researchCount[1];
-    researchBoost[2] = researchCount[2].divide(3).add(1);
+    researchBoost[2] = researchCount[2].divide(3).log(3).add(1);
     researchBoost[3] = researchCount[3].pow_base(2);
     researchBoost[4] = researchCount[4];
   }
