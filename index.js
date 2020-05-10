@@ -109,7 +109,7 @@ $(function (){
     if (eCount.gt(0)) {
       $('#mainNavs > span:eq(3)').show();
     }
-    if (researchBoost[4].gt(1e3)) {
+    if (researchBoost[4].gt(100)) {
       $('#mainNavs > span:eq(4)').show();
     }
     if (researchBoost[4].gt(1e10)) {
@@ -172,7 +172,7 @@ $(function (){
           return 'x' + notation(researchBoost[index]);
           break;
         case 4:
-          return notation(researchBoost[index]) + '/' + ((researchBoost[index].gt(1e3)) ? ((researchBoost[index].gt(1e10)) ? 'Maxed' : '1.00e10') : '1000.0');
+          return notation(researchBoost[index]) + '/' + ((researchBoost[index].gt(100)) ? ((researchBoost[index].gt(1e10)) ? 'Maxed' : '1.00e10') : '100.0');
           break;
       }
     });
