@@ -6,6 +6,7 @@ $(function (){
   gps2 = new Decimal('0');
   gps3 = new Decimal('0');
   gps4 = new Decimal('0');
+  gLimit = new Decimal('1e20');
   gLimitLevel = new Decimal('0');
   booster = new Decimal('0');
   bpc = new Decimal('1');
@@ -15,6 +16,9 @@ $(function (){
   epGain = new Decimal('0');
   epBoost = new Decimal('1');
   eCount = new Decimal('0');
+  bits = new Decimal('0');
+  np = new Decimal('0');
+  nCount = new Decimal('0');
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
   menuNow = 0;
@@ -35,11 +39,17 @@ $(function (){
   function notation(num) {
     if (notationMod == 0) {
       if (num.exponent >= 6) {
-        return ((num.mantissa).toFixed(2)) + 'e' + num.exponent;
+        return ((num.gt('1.8e308')) ? 'Infinite': ((num.mantissa).toFixed(2)) + 'e' + num.exponent);
       } else {
         return (num.mantissa*(10**num.exponent)).toFixed(2);
       }
     }
+  }
+  function normalNotation(num) {
+    return ;
+  }
+  function fixedNum(num) {
+    return num.mantissa*10**num.exponent;
   }
   function gameSave() {
     saveFile = [];
@@ -107,6 +117,9 @@ $(function (){
         break;
       case 3:
         displayExplosion();
+        break;
+      case 4:
+        displayBitPeak();
         break;
     }
   }
@@ -182,11 +195,25 @@ $(function (){
       }
     });
   }
+  function displayBitPeak() {
+    $('#bitDisplay').html(function (index,html) {
+      return 'You have ' + Math.round(fixedNum(bits)) + ' bits';
+    });
+    $('#bits > p').html(function (index,html) {
+      return fixedNum(bitOpen[19-index]);
+    });
+    $("#bits > p:contains('0')").css('color', '#216622');
+    $("#bits > p:contains('0')").css('text-shadow', '');
+    $("#bits > p:contains('1')").css('color', '#34eb37');
+    $("#bits > p:contains('1')").css('text-shadow', '0 0 7px #34eb37');
+  }
 
   function calcAll() {
     calcExplosion();
     calcBooster();
     calcBasic();
+    calcBitPeak();
+    calcBeforeBreak();
   }
   function calcBasic() {
     overallBoost = boosterBoost.multiply(epBoost);
@@ -248,6 +275,18 @@ $(function (){
     researchBoost[2] = new Decimal(researchCount[2].divide(3).add(1).log(3)+1);
     researchBoost[3] = researchCount[3].pow_base(2);
     researchBoost[4] = researchCount[4];
+  }
+  function calcBitPeak() {
+    fixedBit = Math.round(fixedNum(bits));
+    for (var i = 0; i < 20; i++) {
+      bitOpen[i] = ((2**i-2 < (fixedBit-1)%(2**(i+1)) && (fixedBit-1)%(2**(i+1)) < 2**(i+1)-1) ? new Decimal(1) : new Decimal(0));
+    }
+  }
+  function calcBeforeBreak() {
+    ((gunpowder.gt('1.8e308')) ? gunpowder = new Decimal('1.79e308') : '' );
+    ((gLimit.gt('1.8e308')) ? gLimit = new Decimal('1.79e308') : '' );
+    ((booster.gt('1.8e308')) ? booster = new Decimal('1.801e308') : '' );
+    ((bpc.gt('1.8e308')) ? bpc = new Decimal('1.8001e308') : '' );
   }
 
   function firstExplosion() {
@@ -351,6 +390,9 @@ $(function (){
   });
   $(document).on('click','#explosionNow',function() {
     doExplosion();
+  });
+  $(document).on('click','#bitButton',function() {
+    bits = bits.add(1);
   });
 
   setInterval( function (){

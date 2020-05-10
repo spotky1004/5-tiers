@@ -394,3 +394,62 @@
 #explosionNow:hover {
   transform: scale(1.1);
 }
+#bitDisplay {
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #fff;
+  font-size: 3em;
+  text-shadow: 0 0 4px #3fc43f, 0 0 8px #3fc43f;
+}
+#bits {
+  margin-left: 5vw;
+  width: 90vw;
+  height: 4.5vw;
+  background-color: #232423;
+}
+#bits > p {
+  float: left;
+  padding-top: 0.65vw;
+  font-size: 2.5vw;
+  text-align: center;
+  width: 4.5vw;
+  height: 4.5vw;
+  cursor: pointer;
+}
+#bitDesc {
+  margin-left: 5vw;
+  width: 90vw;
+  background-color: #232423;
+}
+#bitDesc > span {
+  color: #34eb37;
+  font-size: 1vw;
+}
+#bitDesc > span:nth-child(1) {
+  margin-left: 5px;
+}
+#bitDesc > span:nth-child(2) {
+  position: absolute;
+  left: 55vw;
+}
+#bitButton {
+  margin-top: 1vh;
+  margin-left: 42.5vw;
+  font-size: 1.2vw;
+  width: 15vw;
+  text-align: center;
+  color: #216622;
+  background-color: #1c261c;
+  border: 3px solid #216622;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#bitButton:hover {
+  color: #34eb37;
+  background-color: #86b086;
+  border: 3px solid #34eb37;
+}
+#bitButton:active {
+  text-shadow: 0 0 3px #34eb37;
+  transform: scale(1.1);
+}
