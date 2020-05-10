@@ -229,7 +229,6 @@ $(function (){
     epBoost = ep.sqrt(2).add(1);
     researchProgressSpeed = new Decimal('0.99');
     researchProgressGain = researchProgressSpeed.pow(tickGain).multiply(-1).add(1);
-    console.log(notation(researchProgressGain));
     for (var i = 0; i < 10; i++) {
       if (researchAssign[i].gt(0)) {
         researchCount[i] = researchCount[i].add(researchAssign[i].multiply(researchProgressGain));
