@@ -228,7 +228,7 @@ $(function (){
   function calcExplosion() {
     epBoost = ep.sqrt(2).add(1);
     for (var i = 0; i < 10; i++) {
-      if (researchAssign[i] > 0) {
+      if (researchAssign[i].gt(0)) {
         researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/500));
         researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/500));
       } else {
