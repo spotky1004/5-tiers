@@ -157,7 +157,7 @@ $(function (){
     if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
       $('#explosionNow').show();
       $('#explosionNow > p').html(function (index,html) {
-        return 'Explosion Now and get (E)<br>' + notation(epGain) + ' EP';
+        return 'Explode Now and get (E)<br>' + notation(epGain) + ' EP';
       });
     } else {
       $('#explosionNow').hide();
