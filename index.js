@@ -228,8 +228,8 @@ $(function (){
   function calcExplosion() {
     epBoost = ep.sqrt(2).add(1);
     for (var i = 0; i < 10; i++) {
-      researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/2000));
-      researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/2000));
+      researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/500));
+      researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/500));
     }
     researchBoost[0] = researchCount[0].pow(3);
     researchBoost[1] = researchCount[1];
