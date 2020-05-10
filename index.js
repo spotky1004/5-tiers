@@ -166,7 +166,7 @@ $(function (){
           return '+' + notation(researchBoost[index]);
           break;
         case 1:
-          return 'x' + notation(researchBoost[index].pow_base('1e5'));
+          return 'x' + notation(researchBoost[index].pow_base('5'));
           break;
         case 2: case 3:
           return 'x' + notation(researchBoost[index]);
@@ -189,7 +189,7 @@ $(function (){
     gps2 = gps2.add(gps3.multiply(overallBoost).multiply(tickGain));
     gps1 = gps1.add(gps2.multiply(overallBoost).multiply(tickGain));
     gunpowder = gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain));
-    gLimit = gLimitLevel.pow_base('1e5').multiply('1e20');
+    gLimit = gLimitLevel.pow_base('5').multiply('1e20');
     if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
       epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2));
     }
