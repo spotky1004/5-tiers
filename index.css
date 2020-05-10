@@ -290,5 +290,105 @@
   text-align: center;
   color: #c2372f;
   font-size: 3em;
-  text-shadow: 0 0 3px #c2372f;
+  text-shadow: 0 0 4px #c2372f;
+}
+#explosionWarp > p {
+  margin: 1vw 0 2vw 45vw;
+  width: 10vw;
+  text-align: center;
+  color: #fc2c03;
+  font-size: 1.5vw;
+  text-decoration: underline;
+  text-shadow: 0 0 2px #fc2c03;
+}
+#explosionResearchWarp {
+  margin-left: 5vw;
+  width: 90vw;
+}
+#explosionResearchWarp > div {
+  width: 90vw;
+  height: 1.7vw;
+  margin: 3vh 0;
+}
+#explosionResearchWarp > div > span {
+  position: absolute;
+  font-size: 1.7vw;
+}
+#explosionResearchWarp > div > span:not(:nth-child(4)) {
+  animation-duration: 2s;
+  animation-name: researchShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes researchShiny {
+  from {
+    filter: blur(0.1px);
+  }
+  50% {
+    filter: blur(1px);
+  }
+  to {
+    filter: blur(0.1px);
+  }
+}
+#explosionResearchWarp > div > span:nth-child(2) {
+  left: 30vw;
+}
+#explosionResearchWarp > div > span:nth-child(3) {
+  left: 55vw;
+}
+#explosionResearchWarp > div > span:nth-child(4) {
+  width: 15vw;
+  left: 75vw;
+  font-size: 1.2vw;
+  text-align: center;
+  color: #eddfdf;
+  background-color: #d99691;
+  border: 3px solid #5c1e1a;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#explosionResearchWarp > div > span:nth-child(4):hover {
+  color: #5c1e1a;
+  background-color: #b07772;
+  border: 3px solid #eddfdf;
+  border-radius: 3px;
+}
+#explosionResearchWarp > div > span:nth-child(4):active {
+  color: #2e0e0c;
+  transform: scale(1.2);
+}
+#explosionNow {
+  margin-left: 40vw;
+  padding: 2px 0;
+  text-align: center;
+  width: 20vw;
+  background: linear-gradient(90deg, #e3463b 0%, #9e2f28 50%);
+  border: 3px solid #91413c;
+  border-radius: 3px;
+}
+#explosionNow > p {
+  font-size: 1vw;
+
+  animation-duration: 10s;
+  animation-name: explsionNowTShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes explsionNowTShiny {
+  from {
+    color: white;
+    filter: blur(1px);
+  }
+  50% {
+    color: #db857f;
+    filter: blur(1.2px);
+  }
+  to {
+    color: white;
+    filter: blur(1px);
+  }
+}
+#explosionNow:hover {
+  transform: scale(1.1);
 }

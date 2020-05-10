@@ -12,6 +12,7 @@ $(function (){
   boughtStr = new Decimal('0');
   boosterBoost = new Decimal('1');
   ep = new Decimal('0');
+  epGain = new Decimal('0');
   epBoost = new Decimal('1');
   eCount = new Decimal('0');
   lastTick = new Date().getTime();
@@ -58,6 +59,7 @@ $(function (){
       }
     }
   }
+
   function buyMaxAll() {
     buyMaxStr();
   }
@@ -87,6 +89,7 @@ $(function (){
       }
     }
   }
+
   function displayAll() {
     displayBasic();
     displayUnlocks();
@@ -100,6 +103,17 @@ $(function (){
       case 3:
         displayExplosion();
         break;
+    }
+  }
+  function displayUnlocks() {
+    if (ep.gt(0)) {
+      $('#mainNavs > span:eq(3)').show();
+    }
+    if (researchBoost[4].gt(1e3)) {
+      $('#mainNavs > span:eq(4)').show();
+    }
+    if (researchBoost[4].gt(1e10)) {
+      $('#mainNavs > span:eq(5)').show();
     }
   }
   function displayBasic() {
@@ -122,6 +136,14 @@ $(function (){
         'class' : 'strBuy' + ((gunpowder.greaterThanOrEqualTo(structsCost[i])) ? 'Y' : 'N')
       });
     }
+    if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
+      $('#explosionNow').show();
+      $('#explosionNow > p').html(function (index,html) {
+        return 'Explosion Now and get <br>' + notation(epGain) + ' EP';
+      });
+    } else {
+      $('#explosionNow').hide();
+    }
   }
   function displayBooster() {
     $('#booster').html(function (index,html) {
@@ -135,16 +157,31 @@ $(function (){
     $('#explosionPoint').html(function (index,html) {
       return 'You have ' + notation(ep) + ' Explosion Point -> x' + notation(epBoost) + ' production';
     });
+    $('#explosionResearchWarp > div > span:nth-child(2)').html(function (index,html) {
+      return notation(researchAssign[index]) + ' Working';
+    });
+    $('#explosionResearchWarp > div > span:nth-child(3)').html(function (index,html) {
+      switch (index) {
+        case 0:
+          return '+' + notation(researchBoost[index]);
+          break;
+        case 1:
+          return 'x' + notation(researchBoost[index].pow_base('1e5'));
+          break;
+        case 2: case 3:
+          return 'x' + notation(researchBoost[index]);
+          break;
+        case 4:
+          return notation(researchBoost[index]) + '/' + ((researchBoost[index].gt(1e3)) ? ((researchBoost[index].gt(1e10)) ? 'Maxed' : '1.00e10') : '1000.0');
+          break;
+      }
+    });
   }
+
   function calcAll() {
     calcExplosion();
     calcBooster();
     calcBasic();
-  }
-  function displayUnlocks() {
-    if (ep.gt(0)) {
-      $('#mainNavs > span:eq(3)').show();
-    }
   }
   function calcBasic() {
     overallBoost = boosterBoost.multiply(epBoost);
@@ -153,42 +190,21 @@ $(function (){
     gps1 = gps1.add(gps2.multiply(overallBoost).multiply(tickGain));
     gunpowder = gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain));
     gLimit = gLimitLevel.pow_base('1e5').multiply('1e20');
+    if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
+      epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2));
+    }
     if (gunpowder.gt(gLimit)) {
-      if (eCount.lt(10)) {
-        firstExplosion();
+      if (gLimitLevel.lt(0.1)) {
+        epGain = new Decimal('1').multiply(researchBoost[2]);
+        if (eCount.lt(10)) {
+          firstExplosion();
+        }
+        doExplosion();
+      } else {
+        gunpowder = gLimit;
+        epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2));
+        doExplosion();
       }
-      eCount = eCount.add('1');
-      ep = ep.add('1');
-      gunpowder = new Decimal('10');
-      structsCost = {
-        0: new Decimal('1e1'),
-        1: new Decimal('1e2'),
-        2: new Decimal('2.5e3'),
-        3: new Decimal('1.0e4'),
-        4: new Decimal('1.5e5'),
-        5: new Decimal('1.0e6'),
-        6: new Decimal('5.0e6'),
-        7: new Decimal('1.0e8'),
-        8: new Decimal('1.0e9'),
-        9: new Decimal('1.0e13'),
-      };
-      structsHave = {
-        0: new Decimal('0'),
-        1: new Decimal('0'),
-        2: new Decimal('0'),
-        3: new Decimal('0'),
-        4: new Decimal('0'),
-        5: new Decimal('0'),
-        6: new Decimal('0'),
-        7: new Decimal('0'),
-        8: new Decimal('0'),
-        9: new Decimal('0')
-      };
-      gps1 = new Decimal('0');
-      gps2 = new Decimal('0');
-      gps3 = new Decimal('0');
-      gps4 = new Decimal('0');
-      booster = new Decimal('0');
     }
   }
   function calcBooster() {
@@ -196,7 +212,7 @@ $(function (){
     for (var i = 0; i < 10; i++) {
       boughtStr = boughtStr.add(structsHave[i]);
     }
-    bpc = boughtStr.multiply(0.2).add(1)
+    bpc = boughtStr.multiply(0.2).add(1).multiply(researchBoost[3]);
     boosterDeacy = new Decimal('1.001');
     boosterDeacy = boosterDeacy.pow_base(tickGain/500+1);
     if (booster.gt(0.1)) {
@@ -211,13 +227,59 @@ $(function (){
   }
   function calcExplosion() {
     epBoost = ep.sqrt(2).add(1);
+    for (var i = 0; i < 10; i++) {
+      researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/100));
+      researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/100))
+    }
+    researchBoost[0] = researchCount[0].pow(3);
+    researchBoost[1] = researchCount[1];
+    gLimitLevel = researchCount[1];
+    researchBoost[2] = researchCount[2].divide(3).add(1);
+    researchBoost[3] = researchCount[3].pow_base(2);
+    researchBoost[4] = researchCount[4];
   }
+
   function firstExplosion() {
     $('#gunpowder').hide();
     $('#gps').hide();
     $('#mainNavs').hide();
     $('#warpMenus').hide();
     $('#explsionScreen').show();
+  }
+  function doExplosion() {
+    eCount = eCount.add('1');
+    ep = ep.add(epGain);
+    gunpowder = new Decimal(researchBoost[0].add('10'));
+    structsCost = {
+      0: new Decimal('1e1'),
+      1: new Decimal('1e2'),
+      2: new Decimal('2.5e3'),
+      3: new Decimal('1.0e4'),
+      4: new Decimal('1.5e5'),
+      5: new Decimal('1.0e6'),
+      6: new Decimal('5.0e6'),
+      7: new Decimal('1.0e8'),
+      8: new Decimal('1.0e9'),
+      9: new Decimal('1.0e13'),
+    };
+    structsHave = {
+      0: new Decimal('0'),
+      1: new Decimal('0'),
+      2: new Decimal('0'),
+      3: new Decimal('0'),
+      4: new Decimal('0'),
+      5: new Decimal('0'),
+      6: new Decimal('0'),
+      7: new Decimal('0'),
+      8: new Decimal('0'),
+      9: new Decimal('0')
+    };
+    gps1 = new Decimal('0');
+    gps2 = new Decimal('0');
+    gps3 = new Decimal('0');
+    gps4 = new Decimal('0');
+    booster = new Decimal('0');
+    epGain = new Decimal('0');
   }
 
   $(document).on('click','#mainNavs > span',function() {
@@ -269,6 +331,16 @@ $(function (){
     $('#mainNavs').show();
     $('#warpMenus').show();
     $('#explsionScreen').hide();
+  });
+  $(document).on('click','#explosionResearchWarp > div > span:nth-child(4)',function() {
+    indexThis = $('#explosionResearchWarp > div > span:nth-child(4)').index(this);
+    if (ep.greaterThanOrEqualTo(1)) {
+      researchAssign[indexThis] = researchAssign[indexThis].add(1);
+      ep = ep.minus(1);
+    }
+  });
+  $(document).on('click','#explosionNow',function() {
+    doExplosion();
   });
 
   setInterval( function (){

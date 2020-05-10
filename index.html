@@ -6,11 +6,11 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="index.css?ver=0.2.6">
+    <link rel="stylesheet" href="index.css?ver=0.2.7">
     <script src="breakinfinity.js"></script>
-    <script src="varSet.js?ver=0.2.6"></script>
-    <script src="index.js?ver=0.2.6"></script>
-    <title>Gunpower Factory v0.2.6</title>
+    <script src="varSet.js?ver=0.2.7"></script>
+    <script src="index.js?ver=0.2.7"></script>
+    <title>Gunpowder Factory v0.2.7</title>
   </head>
   <body>
     <div id="gunpowder">
@@ -73,6 +73,9 @@
         <div class="structs">
           <span>Stopwatch: 0 (10g/s<sup>4</sup>)</span><span>cost: 1.00e13g</span><span class="strBuyN">Buy</span>
         </div>
+        <div id="explosionNow" style="display:none;">
+          <p>Explosion Now and get <br>0 EP</p>
+        </div>
       </div>
       <div id="boosterWarp" style="display:none;">
         <div id="booster">
@@ -87,6 +90,24 @@
       <div id="explosionWarp" style="display:none;">
         <div id="explosionPoint">
           You Have 0.0 Explosion Point -> x0 production
+        </div>
+        <p>Research</p>
+        <div id="explosionResearchWarp">
+          <div>
+            <span>Start Gunpowder</span><span>0 Working</span><span>+0.00</span><span>Assign (+1.0)</span>
+          </div>
+          <div>
+            <span>Gunpowder Cap Increase</span><span>0 Working</span><span>x1.00</span><span>Assign (+1.0)</span>
+          </div>
+          <div>
+            <span>EP Multiply</span><span>0 Working</span><span>x1.00</span><span>Assign (+1.0)</span>
+          </div>
+          <div>
+            <span>Booster Multiply</span><span>0 Working</span><span>x1.00</span><span>Assign (+1.0)</span>
+          </div>
+          <div>
+            <span>Unlock Next Layer</span><span>0 Working</span><span>0/10</span><span>Assign (+1.0)</span>
+          </div>
         </div>
       </div>
       <div id="bitPeakWarp" style="display:none;">
@@ -117,7 +138,7 @@
       </div>
     </div>
     <div id="explsionScreen" style="display:none;">
-      <p>Your lab got boomed, but got 1 Explosion Point!<br>
+      <p>Your lab got boomed, but got Explosion Point!<br>
       (Click to continue)</p>
     </div>
   </body>

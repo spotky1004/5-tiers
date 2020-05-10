@@ -38,10 +38,46 @@ structsPower = [
   [5e3, 3],
   [2e5, 4]
 ];
+researchAssign = {
+  0: new Decimal('0'),
+  1: new Decimal('0'),
+  2: new Decimal('0'),
+  3: new Decimal('0'),
+  4: new Decimal('0'),
+  5: new Decimal('0'),
+  6: new Decimal('0'),
+  7: new Decimal('0'),
+  8: new Decimal('0'),
+  9: new Decimal('0')
+};
+researchCount = {
+  0: new Decimal('0'),
+  1: new Decimal('0'),
+  2: new Decimal('0'),
+  3: new Decimal('0'),
+  4: new Decimal('0'),
+  5: new Decimal('0'),
+  6: new Decimal('0'),
+  7: new Decimal('0'),
+  8: new Decimal('0'),
+  9: new Decimal('0')
+};
+researchBoost = {
+  0: new Decimal('0'),
+  1: new Decimal('1'),
+  2: new Decimal('1'),
+  3: new Decimal('1'),
+  4: new Decimal('0'),
+  5: new Decimal('0'),
+  6: new Decimal('0'),
+  7: new Decimal('0'),
+  8: new Decimal('0'),
+  9: new Decimal('0')
+};
 varData = [
   'gunpowder', 'gps1', 'gps2', 'gps3', 'gps4',
   'structsCost', 'gLimitLevel', 'lastTick', 'booster', 'structsHave',
-  'ep', 'eCount'
+  'ep', 'eCount', 'researchAssign', 'researchCount'
 ];
 resetData = {
   0: new Decimal('10'),
@@ -55,5 +91,7 @@ resetData = {
   8: new Decimal('0'),
   9: structsHave,
   10: new Decimal('0'),
-  11: new Decimal('0')
+  11: new Decimal('0'),
+  12: researchAssign,
+  13: researchCount
 };
