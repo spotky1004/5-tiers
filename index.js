@@ -232,7 +232,7 @@ $(function (){
         researchCount[i] = researchCount[i].add(researchAssign[i].multiply(tickGain/500));
         researchAssign[i] = researchAssign[i].minus(researchAssign[i].multiply(tickGain/500));
       } else {
-        researchCount[i] = 0;
+        researchCount[i] = new Decimal('0');
       }
     }
     researchBoost[0] = researchCount[0].pow(3);
