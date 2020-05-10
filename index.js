@@ -106,7 +106,7 @@ $(function (){
     }
   }
   function displayUnlocks() {
-    if (ep.gt(0)) {
+    if (eCount.gt(0)) {
       $('#mainNavs > span:eq(3)').show();
     }
     if (researchBoost[4].gt(1e3)) {
