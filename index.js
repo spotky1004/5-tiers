@@ -506,7 +506,7 @@ $(function (){
       return 'Bit Nr' + (thisCell+1);
     });
     $('#bitDesc > span:nth-child(2)').html(function (index,html) {
-      return ((thisCell != 16 || researchBoost[4].gt(1e10)) ? bitBoostName[bitEffect[thisCell][0]] : '??? gain' ) + ' ' + ((bitEffect[thisCell][0] == 2) ?  '+' : '' ) + bitBoostOperator[bitEffect[thisCell][0]] + bitEffect[thisCell][1] + ((bitEffect[thisCell][0] == 3) ?  ' level' : '' );
+      return ((thisCell != 17 || researchBoost[4].gt(1e10)) ? bitBoostName[bitEffect[thisCell][0]] : '??? gain' ) + ' ' + ((bitEffect[thisCell][0] == 2) ?  '+' : '' ) + bitBoostOperator[bitEffect[thisCell][0]] + bitEffect[thisCell][1] + ((bitEffect[thisCell][0] == 3) ?  ' level' : '' );
     });
   });
   $(document).on('click','#bitThingWarp > div:nth-child(2) > span:not(.bitBuyN)',function() {
