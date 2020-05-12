@@ -265,7 +265,7 @@ $(function (){
     calcBeforeBreak();
     gLimit = gLimitLevel.pow_base('5').multiply('1e20');
     if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
-      epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2)).add('1');
+      epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2)).add('1').multiply(bitBoost[4]);
     }
     if (gunpowder.gt(gLimit)) {
       if (gLimitLevel.lt(0.1)) {
@@ -276,7 +276,7 @@ $(function (){
         doExplosion();
       } else {
         gunpowder = gLimit;
-        epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2)).add('1');
+        epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2)).add('1').multiply(bitBoost[4]);
         doExplosion();
       }
     }
@@ -377,7 +377,7 @@ $(function (){
   }
   function doExplosion() {
     eCount = eCount.add('1');
-    ep = ep.add(epGain).multiply(bitBoost[4]);
+    ep = ep.add(epGain);
     gunpowder = new Decimal(researchBoost[0].add('10'));
     structsCost = {
       0: new Decimal('1e1'),
