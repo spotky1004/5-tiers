@@ -528,17 +528,23 @@ $(function (){
         bitProductionBought[indexThis] = bitProductionBought[indexThis].add(1);
         break;
     }
+    calcBitPeak();
+    displayBitPeak();
   });
   $(document).on('click','#bitThingWarp > div:nth-child(3) > span:not(.bitBuyN):not(.bitBuyB)',function() {
     indexThis = $('#bitThingWarp > div:nth-child(3) > span').index(this);
     bits = bits.minus(bitUpgradeCost[indexThis]);
     bitUpgradeBought[indexThis]++;
+    calcBitPeak();
+    displayBitPeak();
   });
   $(document).on('click','#bitThingWarp > div:nth-child(4) > div',function() {
     if (bits.greaterThanOrEqualTo(bitShift.multiply(2**20-1))) {
       bitPrestige = bitPrestige.add(1);
       bits = new Decimal(0);
     }
+    calcBitPeak();
+    displayBitPeak();
   });
 
   setInterval( function (){
