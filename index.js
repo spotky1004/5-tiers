@@ -17,6 +17,10 @@ $(function (){
   epBoost = new Decimal('1');
   eCount = new Decimal('0');
   bits = new Decimal('0');
+  bitPC = new Decimal('1');
+  bitPS = new Decimal('0');
+  bitPrestige = new Decimal('0');
+  meta = new Decimal('0');
   np = new Decimal('0');
   nCount = new Decimal('0');
   lastTick = new Date().getTime();
@@ -24,6 +28,8 @@ $(function (){
   menuNow = 0;
   notationMod = 0;
   titleCool = 10;
+  bulkResearch = 0;
+  playtime = new Date().getTime();
 
   $(document).keydown(function(e) {
     if (event.keyCode == '77') {
@@ -165,7 +171,7 @@ $(function (){
   }
   function displayBooster() {
     $('#booster').html(function (index,html) {
-      return 'You have ' + notation(booster) + ' Boosters -> x' + boosterBoost.toFixed(2) + ' production';
+      return 'You have ' + notation(booster) + ' Boosters -> x' + notation(boosterBoost) + ' production';
     });
     $('#boostButton').html(function (index,html) {
       return 'Boost! (+' + notation(bpc) + ')';
@@ -175,6 +181,11 @@ $(function (){
     $('#explosionPoint').html(function (index,html) {
       return 'You have ' + notation(ep) + ' Explosion Point -> x' + notation(epBoost) + ' production';
     });
+    if (bitUpgradeBought[1] == 1) {
+      $('#bulkResearch').show();
+    } else {
+      $('#bulkResearch').hide();
+    }
     $('#explosionResearchWarp > div > span:nth-child(2)').html(function (index,html) {
       return notation(researchAssign[index]) + ' Working';
     });
@@ -197,7 +208,10 @@ $(function (){
   }
   function displayBitPeak() {
     $('#bitDisplay').html(function (index,html) {
-      return 'You have ' + Math.round(fixedNum(bits)) + ' bits';
+      return 'You have ' + notation(bits) + '/' + notation(bitShift.multiply(2**20-1)) + ' bits';
+    });
+    $('#bitpsDisplay').html(function (index,html) {
+      return notation(bitPS) + 'b/s';
     });
     $('#bits > p').html(function (index,html) {
       return fixedNum(bitOpen[19-index]);
@@ -206,6 +220,33 @@ $(function (){
     $("#bits > p:contains('0')").css('text-shadow', '');
     $("#bits > p:contains('1')").css('color', '#34eb37');
     $("#bits > p:contains('1')").css('text-shadow', '0 0 7px #34eb37');
+    if (bits.greaterThanOrEqualTo(bitShift.multiply(2**20-1))) {
+      $("#bits > p:contains('1')").css('color', '#eb3434');
+      $("#bits > p:contains('1')").css('text-shadow', '0 0 7px #eb3434');
+    }
+    $('#bitButton').html(function (index,html) {
+      return 'Add bit! (+' + notation(bitPC) + ')';
+    });
+    $('#bitThingWarp > div:nth-child(1) > div > span:nth-child(2)').html(function (index,html) {
+      return bitBoostOperator[index] + notation(bitBoost[index]);
+    });
+    $('#bitThingWarp > div:nth-child(2) > span > p:nth-child(2)').html(function (index,html) {
+      return 'Cost: ' + notation(bitProductionCost[index]) + ((index == 0) ? ' Gunpowder' : ((index == 1 || index == 2) ? ' EP' : ((index == 3) ? ((researchCount[4].gt(1e10)) ? ' Meta' : '????' ) : ((index == 4) ? ' bits' : '' ) ) ) );
+    });
+    for (var i = 0; i < 5; i++) {
+      resThis = ((i == 0) ? gunpowder : ((i == 1 || i == 2) ? ep : ((i == 3) ? meta : ((i == 4) ? bits : '' ) ) ) );
+      $('#bitThingWarp > div:nth-child(2) > span:eq(' + i + ')').attr({
+        'class' : 'bitBuy' + ((resThis.gt(bitProductionCost[i])) ? 'Y' : 'N')
+      });
+    }
+    for (var i = 0; i < 10; i++) {
+      $('#bitThingWarp > div:nth-child(3) > span:eq(' + i + ')').attr({
+        'class' : 'bitBuy' + ((bitUpgradeBought[i] == 1) ? 'B' : ((bits.gt(bitUpgradeCost[i])) ? 'Y' : 'N') )
+      });
+    }
+    $('#bitThingWarp > div:nth-child(4) > p:nth-child(2)').html(function (index,html){
+      return 'Prestige count: ' + fixedNum(bitPrestige);
+    });
   }
 
   function calcAll() {
@@ -216,11 +257,12 @@ $(function (){
     calcBeforeBreak();
   }
   function calcBasic() {
-    overallBoost = boosterBoost.multiply(epBoost);
+    overallBoost = boosterBoost.multiply(epBoost).multiply(bitBoost[0]).multiply(((bitUpgradeBought[0] == 1) ? 5 : 1 ));
     gps3 = gps3.add(gps4.multiply(overallBoost).multiply(tickGain));
     gps2 = gps2.add(gps3.multiply(overallBoost).multiply(tickGain));
     gps1 = gps1.add(gps2.multiply(overallBoost).multiply(tickGain));
     gunpowder = gunpowder.add(gps1.multiply(overallBoost).multiply(tickGain));
+    calcBeforeBreak();
     gLimit = gLimitLevel.pow_base('5').multiply('1e20');
     if (gLimitLevel.gt(0.1) && gunpowder.gt(1e20)) {
       epGain = new Decimal('1').multiply(researchBoost[2]).multiply(gunpowder.divide('1e20').log(2)).add('1');
@@ -244,23 +286,24 @@ $(function (){
     for (var i = 0; i < 10; i++) {
       boughtStr = boughtStr.add(structsHave[i]);
     }
-    bpc = boughtStr.multiply(0.2).add(1).multiply(researchBoost[3]);
+    bpc = boughtStr.multiply(0.2).add(1).multiply(researchBoost[3]).multiply(bitBoost[1]).pow(((bitUpgradeBought[3] == 1) ? 0.1 : 1 ));
     boosterDeacy = new Decimal('1.001');
     boosterDeacy = boosterDeacy.pow_base(tickGain/500+1);
     if (booster.gt(0.1)) {
       booster = booster.divide(boosterDeacy);
     } else {
-      booster = booster.add(booster.multiply('-1'))
+      booster = booster.add(booster.multiply('-1'));
     }
     boosterBoost = new Decimal(booster.divide('10').add('1').log(8)+1);
     if (booster.gt('1e10')) {
       boosterBoost = new Decimal(boosterBoost*booster.divide('1e9').log(10));
     }
+    boosterBoost = boosterBoost.pow(bitBoost[2]).multiply(((bitUpgradeBought[3] == 1) ? boosterBoost.pow(0.2) : 1 ));
   }
   function calcExplosion() {
     epBoost = ep.sqrt(2).add(1);
     researchProgressSpeed = new Decimal('0.99');
-    researchProgressGain = researchProgressSpeed.pow(tickGain).multiply(-1).add(1);
+    researchProgressGain = researchProgressSpeed.pow(tickGain/5*((bitUpgradeBought[2] == 1) ? 10 : 1 )).multiply(-1).add(1);
     for (var i = 0; i < 10; i++) {
       if (researchAssign[i].gt(0)) {
         researchCount[i] = researchCount[i].add(researchAssign[i].multiply(researchProgressGain));
@@ -277,16 +320,52 @@ $(function (){
     researchBoost[4] = researchCount[4];
   }
   function calcBitPeak() {
-    fixedBit = Math.round(fixedNum(bits));
+    bitShift = new Decimal(bitPrestige.pow_base(8).divide(bitProductionBought[4].pow_base(2)))
+    bitPC = new Decimal('1');
+    bitPC = bitPC.add(bitBoost[5]).multiply(bitProductionBought[2].pow_base(3));
+    bitPS = new Decimal('0');
+    bitPS = bitPS.add(bitProductionBought[0]).add(bitProductionBought[1]).multiply(bitProductionBought[3].pow_base(1.7));
+    bits = bits.add(bitPS.multiply(tickGain))
+    if (bits.gt(bitShift.multiply(2**20-1))) {
+      bits = bitShift.multiply(2**20-1);
+    }
+    fixedBit = Math.round(fixedNum(bits.divide(bitShift)));
     for (var i = 0; i < 20; i++) {
       bitOpen[i] = ((2**i-2 < (fixedBit-1)%(2**(i+1)) && (fixedBit-1)%(2**(i+1)) < 2**(i+1)-1) ? new Decimal(1) : new Decimal(0));
+    }
+    bitBoost = {
+      0: new Decimal(bitPrestige.pow_base(4200)),
+      1: new Decimal(bitPrestige.pow_base(35000)),
+      2: new Decimal(bitPrestige.multiply(0.3).add(1)),
+      3: new Decimal(bitPrestige.multiply(3)),
+      4: new Decimal(bitPrestige.pow_base(6)),
+      5: new Decimal(bitPrestige.multiply(30)),
+      6: new Decimal(bitPrestige.pow_base(10))
+    };
+    for (var i = 0; i < 20; i++) {
+      if (bitOpen[i] == 1) {
+        switch (bitEffect[i][0]) {
+          case 0: case 1: case 4: case 6:
+            bitBoost[bitEffect[i][0]] = bitBoost[bitEffect[i][0]].multiply(bitEffect[i][1]);
+            break;
+          case 2: case 3: case 5:
+            bitBoost[bitEffect[i][0]] = bitBoost[bitEffect[i][0]].add(bitEffect[i][1]);
+            break;
+        }
+      }
+    }
+    bitProductionCost = {
+      0: new Decimal(bitProductionBought[0].pow_base('1e10').multiply('1e50')),
+      1: new Decimal(bitProductionBought[1].pow_base('9').multiply('1e3')),
+      2: new Decimal(bitProductionBought[2].pow('2').pow_base('1e5').multiply('1e5')),
+      3: new Decimal(bitProductionBought[3].pow_base('1e9999').multiply('1e9999')),
+      4: new Decimal(bitProductionBought[4].pow_base('10').multiply('1e7'))
     }
   }
   function calcBeforeBreak() {
     ((gunpowder.gt('1.8e308')) ? gunpowder = new Decimal('1.79e308') : '' );
     ((gLimit.gt('1.8e308')) ? gLimit = new Decimal('1.79e308') : '' );
-    ((booster.gt('1.8e308')) ? booster = new Decimal('1.801e308') : '' );
-    ((bpc.gt('1.8e308')) ? bpc = new Decimal('1.8001e308') : '' );
+    ((booster.gt('1.8e308')) ? booster = new Decimal('1.79e308') : '' );
   }
 
   function firstExplosion() {
@@ -298,7 +377,7 @@ $(function (){
   }
   function doExplosion() {
     eCount = eCount.add('1');
-    ep = ep.add(epGain);
+    ep = ep.add(epGain).multiply(bitBoost[4]);
     gunpowder = new Decimal(researchBoost[0].add('10'));
     structsCost = {
       0: new Decimal('1e1'),
@@ -340,6 +419,7 @@ $(function (){
   });
   $(document).on('click','#boostButton',function() {
     booster = booster.add(bpc);
+    calcBeforeBreak();
     calcBooster();
     displayBooster();
   });
@@ -381,18 +461,84 @@ $(function (){
     $('#warpMenus').show();
     $('#explsionScreen').hide();
   });
+  $(document).on('click','#bulkResearch > span',function() {
+    indexThis = $('#bulkResearch > span').index(this);
+    bulkResearch = indexThis;
+  });
   $(document).on('click','#explosionResearchWarp > div > span:nth-child(4)',function() {
     indexThis = $('#explosionResearchWarp > div > span:nth-child(4)').index(this);
+    switch (bulkResearch) {
+      case 0:
+        toUse = new Decimal(1);
+        break;
+      case 1:
+        toUse = ep.divide(10);
+        break;
+      case 2:
+        toUse = ep.divide(4);
+        break;
+      case 3:
+        toUse = ep.divide(2);
+        break;
+      case 4:
+        toUse = ep;
+        break;
+    }
     if (ep.greaterThanOrEqualTo(1)) {
-      researchAssign[indexThis] = researchAssign[indexThis].add(1);
-      ep = ep.minus(1);
+      researchAssign[indexThis] = researchAssign[indexThis].add(toUse);
+      ep = ep.minus(toUse);
     }
   });
   $(document).on('click','#explosionNow',function() {
     doExplosion();
   });
   $(document).on('click','#bitButton',function() {
-    bits = bits.add(1);
+    bits = bits.add(bitPC);
+  });
+  $(document).on('click','#bitNavs > span',function() {
+    indexThis = $('#bitNavs > span').index(this);
+    $('#bitThingWarp > div').hide();
+    $('#bitThingWarp > div:eq(' + indexThis + ')').show();
+  });
+  $(document).on('mouseover','#bits > p',function(e) {
+    thisCell = 19-$("#bits > p").index(this);
+    $('#bitDesc > span:nth-child(1)').html(function (index,html) {
+      return 'Bit Nr' + (thisCell+1);
+    });
+    $('#bitDesc > span:nth-child(2)').html(function (index,html) {
+      return ((thisCell != 16 || researchBoost[4].gt(1e10)) ? bitBoostName[bitEffect[thisCell][0]] : '??? gain' ) + ' ' + ((bitEffect[thisCell][0] == 2) ?  '+' : '' ) + bitBoostOperator[bitEffect[thisCell][0]] + bitEffect[thisCell][1] + ((bitEffect[thisCell][0] == 3) ?  ' level' : '' );
+    });
+  });
+  $(document).on('click','#bitThingWarp > div:nth-child(2) > span:not(.bitBuyN)',function() {
+    indexThis = $('#bitThingWarp > div:nth-child(2) > span').index(this);
+    switch (indexThis) {
+      case 0:
+        gunpowder = gunpowder.minus(bitProductionCost[indexThis]);
+        bitProductionBought[indexThis] = bitProductionBought[indexThis].add(1);
+        break;
+      case 1: case 2:
+        ep = ep.minus(bitProductionCost[indexThis]);
+        bitProductionBought[indexThis] = bitProductionBought[indexThis].add(1);
+        break;
+      case 3:
+
+        break;
+      case 4:
+        bits = bits.minus(bitProductionCost[indexThis]);
+        bitProductionBought[indexThis] = bitProductionBought[indexThis].add(1);
+        break;
+    }
+  });
+  $(document).on('click','#bitThingWarp > div:nth-child(3) > span:not(.bitBuyN):not(.bitBuyB)',function() {
+    indexThis = $('#bitThingWarp > div:nth-child(3) > span').index(this);
+    bits = bits.minus(bitUpgradeCost[indexThis]);
+    bitUpgradeBought[indexThis]++;
+  });
+  $(document).on('click','#bitThingWarp > div:nth-child(4) > div',function() {
+    if (bits.greaterThanOrEqualTo(bitShift.multiply(2**20-1))) {
+      bitPrestige = bitPrestige.add(1);
+      bits = new Decimal(0);
+    }
   });
 
   setInterval( function (){

@@ -6,11 +6,11 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="index.css?ver=0.3.1">
+    <link rel="stylesheet" href="index.css?ver=0.3.2">
     <script src="breakinfinity.js"></script>
-    <script src="varSet.js?ver=0.3.1"></script>
-    <script src="index.js?ver=0.3.1"></script>
-    <title>Gunpowder Factory v0.3.1</title>
+    <script src="varSet.js?ver=0.3.2"></script>
+    <script src="index.js?ver=0.3.2"></script>
+    <title>Gunpowder Factory v0.3.2</title>
   </head>
   <body>
     <div id="gunpowder">
@@ -92,6 +92,9 @@
           You Have 0.0 Explosion Point -> x0 production
         </div>
         <p>Research</p>
+        <div id="bulkResearch" style="display:none;">
+          <span>+1</span><span>10%</span><span>25%</span><span>50%</span><span>100%</span>
+        </div>
         <div id="explosionResearchWarp">
           <div>
             <span>Start Gunpowder</span><span>0 Working</span><span>+0.00</span><span>Assign (+1.0)</span>
@@ -113,6 +116,9 @@
       <div id="bitPeakWarp" style="display:none;">
         <div id="bitDisplay">
           You have 0 bits
+        </div>
+        <div id="bitpsDisplay">
+          0b/s
         </div>
         <div id="bits">
           <p>0</p>
@@ -137,11 +143,114 @@
           <p>0</p>
         </div>
         <div id="bitDesc">
-          <span>Bit Nr0</span>
-          <span>Comming soon..</span>
+          <span></span>
+          <span></span>
         </div>
         <div id="bitButton">
           Add bit! (+1)
+        </div>
+        <div id="bitNavs">
+          <span>Overall Boost</span>
+          <span>Bit Production</span>
+          <span>Bit Upgrade</span>
+          <span>Bit Prestige</span>
+        </div>
+        <div id="bitThingWarp">
+          <div>
+            <div>
+              <span>Production</span><span>x1</span>
+            </div>
+            <div>
+              <span>Booster</span><span>x1</span>
+            </div>
+            <div>
+              <span>Booster Effect</span><span>^1</span>
+            </div>
+            <div>
+              <span>EP formula boost</span><span>+ 0 levels</span>
+            </div>
+            <div>
+              <span>EP gain</span><span>x1</span>
+            </div>
+            <div>
+              <span>Bit Per Click</span><span>+0</span>
+            </div>
+            <div>
+              <span>???? gain</span><span>x1</span>
+            </div>
+          </div>
+          <div style="display:none;">
+            <span class="bitBuyY">
+              <p>Bit/s +1</p>
+              <p>Cost: Gunpowder</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Bis/s +1</p>
+              <p>Cost: EP</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Bit/click x3</p>
+              <p>Cost: EP</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Bit gain x1.7</p>
+              <p>Cost: ???? ????</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Shift all your output bit <<</p>
+              <p>Cost: 1e6 Bit</p>
+            </span>
+          </div>
+          <div style="display:none;">
+            <span class="bitBuyN">
+              <p>Production x5</p>
+              <p>Cost: 1000.0 Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Add option to Assign EP bulk</p>
+              <p>Cost: 131072.0 Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Research Working Speed x10</p>
+              <p>Cost: 1.04e7 Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Greatly boost Booster Formula, but ^0.1 booster gain</p>
+              <p>Cost: 2.62e9 Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Better EP formula</p>
+              <p>Cost: 1.00e10 Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Comming soon...</p>
+              <p>Cost: Infinite Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Comming soon...</p>
+              <p>Cost: Infinite Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Comming soon...</p>
+              <p>Cost: Infinite Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Comming soon...</p>
+              <p>Cost: Infinite Bit</p>
+            </span>
+            <span class="bitBuyN">
+              <p>Comming soon...</p>
+              <p>Cost: Infinite Bit</p>
+            </span>
+          </div>
+          <div style="display:none;">
+            <p>Make all bit 1 to prestige</p>
+            <p>Prestige count: 0</p>
+            <div>
+              Prestige!
+            </div>
+            <p>Prestige makes all bit effect passive, but reset your bits to 0 and, Shift the output bit thrice >>></p>
+          </div>
         </div>
       </div>
       <div id="metaWarp" style="display:none;">

@@ -294,13 +294,41 @@
   text-shadow: 0 0 4px #c2372f;
 }
 #explosionWarp > p {
-  margin: 1vw 0 2vw 45vw;
+  margin: 1vw 0 0 45vw;
   width: 10vw;
   text-align: center;
   color: #fc2c03;
   font-size: 1.5vw;
   text-decoration: underline;
   text-shadow: 0 0 2px #fc2c03;
+}
+#bulkResearch {
+  margin-left: 5vw;
+  margin-bottom: 3vw;
+  width: 90vw;
+}
+#bulkResearch > span {
+  display: block;
+  float: left;
+  margin-left: 2vw;
+  width: 15vw;
+  font-size: 1.2vw;
+  text-align: center;
+  color: #eddfdf;
+  background-color: #d99691;
+  border: 3px solid #5c1e1a;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#bulkResearch > span:hover {
+  color: #5c1e1a;
+  background-color: #b07772;
+  border: 3px solid #eddfdf;
+  border-radius: 3px;
+}
+#bulkResearch > span:active {
+  color: #2e0e0c;
+  transform: scale(1.2);
 }
 #explosionResearchWarp {
   margin-left: 5vw;
@@ -395,10 +423,16 @@
   transform: scale(1.1);
 }
 #bitDisplay {
-  margin-bottom: 2vh;
   text-align: center;
   color: #fff;
   font-size: 3em;
+  text-shadow: 0 0 4px #3fc43f, 0 0 8px #3fc43f;
+}
+#bitpsDisplay {
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5em;
   text-shadow: 0 0 4px #3fc43f, 0 0 8px #3fc43f;
 }
 #bits {
@@ -450,6 +484,156 @@
   border: 3px solid #34eb37;
 }
 #bitButton:active {
-  text-shadow: 0 0 3px #34eb37;
+  text-shadow: 0 0 10px #34eb37;
+  transform: scale(1.1);
+}
+#bitNavs {
+  margin-left: 5vw;
+  margin-top: 3vh;
+  width: 90vw;
+  text-align: center;
+}
+#bitNavs > span {
+  margin: 0 4px;
+  padding: 2px 4px;
+  font-size: 1.1vw;
+  border-radius: 3px;
+  font-weight: lighter;
+  cursor: pointer;
+  border: 3px solid #218a2b;
+  background-color: #226626;
+  color: #ffffff;
+}
+#bitNavs > span:hover {
+  border: 3px solid #34eb46;
+  background-color: #4ae054;
+  color: #fff;
+}
+#bitNavs > span:active {
+  filter: blur(1.5px);
+}
+#bitThingWarp {
+  margin-top: 2vw;
+}
+#bitThingWarp > div:nth-child(1) {
+  margin-left: 5vw;
+  width: 90vw;
+  height: 21vw;
+}
+#bitThingWarp > div:nth-child(1) > div {
+  height: 3vw;
+}
+#bitThingWarp > div:nth-child(1) > div > span {
+  font-size: 1.7vw;
+}
+#bitThingWarp > div:nth-child(1) > div > span:nth-child(2) {
+  position: absolute;
+  left: 40vw;
+}
+#bitThingWarp > div:nth-child(2) {
+  margin-left: 5vw;
+  width: 90vw;
+  height: 10vw;
+}
+#bitThingWarp > div:nth-child(2) > span {
+  display: block;
+  float: left;
+  margin-left: 1.5vw;
+  width: 16vw;
+  height: 10vw;
+}
+#bitThingWarp > div:nth-child(2) > span > p {
+  text-align: center;
+  font-size: 1vw;
+}
+.bitBuyN {
+  color: white;
+  border: 3px solid #010f01;
+  background-color: #093609;
+  border-radius: 3px;
+}
+.bitBuyY {
+  color: white;
+  border: 3px solid #1d8a1d;
+  background-color: #359c35;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.bitBuyY:hover {
+  color: white;
+  border: 3px solid #55e055;
+  background-color: #70e070;
+  border-radius: 3px;
+}
+.bitBuyY:active {
+  color: white;
+  border: 3px solid #3cba3c;
+  background-color: #4bad4b;
+  border-radius: 3px;
+}
+.bitBuyB {
+  color: white;
+  border: 3px solid #3cba3c;
+  background-color: #4bad4b;
+  border-radius: 3px;
+}
+#bitThingWarp > div:nth-child(3) {
+  margin-left: 5vw;
+  width: 90vw;
+  height: 22vw;
+}
+#bitThingWarp > div:nth-child(3) > span {
+  display: block;
+  float: left;
+  margin-bottom: 1vw;
+  margin-left: 1.5vw;
+  width: 16vw;
+  height: 10vw;
+}
+#bitThingWarp > div:nth-child(3) > span > p {
+  text-align: center;
+  font-size: 1vw;
+}
+#bitThingWarp > div:nth-child(4) > p:nth-child(1) {
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #87a389;
+  font-size: 2.5em;
+  text-shadow: 0 0 4px #3fc43f, 0 0 8px #3fc43f;
+}
+#bitThingWarp > div:nth-child(4) > p:nth-child(2) {
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #87a389;
+  font-size: 2em;
+  text-shadow: 0 0 4px #3fc43f, 0 0 8px #3fc43f;
+}
+#bitThingWarp > div:nth-child(4) > p {
+  margin-top: 1vw;
+  margin-bottom: 2vh;
+  text-align: center;
+  color: #87a389;
+  font-size: 1.5em;
+  text-shadow: 0 0 3px #3fc43f, 0 0 6px #3fc43f;
+}
+#bitThingWarp > div:nth-child(4) > div {
+  margin-top: 1vh;
+  margin-left: 42.5vw;
+  font-size: 1.2vw;
+  width: 15vw;
+  text-align: center;
+  color: #216622;
+  background-color: #1c261c;
+  border: 3px solid #216622;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#bitThingWarp > div:nth-child(4) > div:hover {
+  color: #34eb37;
+  background-color: #86b086;
+  border: 3px solid #34eb37;
+}
+#bitThingWarp > div:nth-child(4) > div:active {
+  text-shadow: 0 0 10px #34eb37;
   transform: scale(1.1);
 }

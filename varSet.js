@@ -96,10 +96,68 @@ bitOpen = {
   18: new Decimal('0'),
   19: new Decimal('0'),
 };
+bitEffect = [
+  [0, 1.5], [0, 4], [1, 5], [1, 7], [2, 0.1], [3, 1], [4, 1.5], [4, 2], [5, 2], [5, 4],
+  [0, 7], [1, 1e3], [2, 0.2], [3, 1], [3, 1], [4, 2], [5, 8], [6, 10], [5, 16], [0, 100]
+];
+bitBoostName = [
+  'Production', 'Booster', 'Booster Effect', 'EP formula boost', 'EP gain',
+  'Bit gain', 'Meta gain'
+];
+bitBoostOperator = [
+  'x', 'x', '^', '', 'x',
+  '+', 'x'
+];
+bitBoost = {
+  0: new Decimal('0'),
+  1: new Decimal('0'),
+  2: new Decimal('0'),
+  3: new Decimal('0'),
+  4: new Decimal('0'),
+  5: new Decimal('0'),
+  6: new Decimal('0'),
+};
+bitProductionBought = [
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+];
+bitUpgradeCost = {
+  0: new Decimal('1000'),
+  1: new Decimal('131072'),
+  2: new Decimal('1.04e7'),
+  3: new Decimal('2.62e9'),
+  4: new Decimal('1e10'),
+  5: new Decimal('1e9999'),
+  6: new Decimal('1e9999'),
+  7: new Decimal('1e9999'),
+  8: new Decimal('1e9999'),
+  9: new Decimal('1e9999'),
+};
+bitUpgradeBought = [
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+];
 varData = [
   'gunpowder', 'gps1', 'gps2', 'gps3', 'gps4',
   'structsCost', 'gLimitLevel', 'lastTick', 'booster', 'structsHave',
-  'ep', 'eCount', 'researchAssign', 'researchCount', 'bits'
+  'ep', 'eCount', 'researchAssign', 'researchCount', 'bits',
+  'bitProductionBought', 'bitUpgradeBought', 'bitPrestige', 'playtime', 'bulkResearch'
 ];
 resetData = {
   0: new Decimal('10'),
@@ -116,5 +174,10 @@ resetData = {
   11: new Decimal('0'),
   12: researchAssign,
   13: researchCount,
-  14: new Decimal('0')
+  14: new Decimal('0'),
+  15: bitProductionBought,
+  16: bitUpgradeBought,
+  17: new Decimal('0'),
+  18: new Date().getTime(),
+  19: 0
 };
